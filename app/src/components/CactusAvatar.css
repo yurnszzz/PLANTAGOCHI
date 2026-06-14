@@ -1,0 +1,33 @@
+.cactus-avatar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.cactus-avatar--animated svg {
+  animation: float 4s ease-in-out infinite;
+}
+
+.cactus-avatar__name {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.cactus-avatar__level {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--green-400);
+  background: var(--bg-glass);
+  padding: 2px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-subtle);
+}
+
+.cactus-flower {
+  animation: bounce-subtle 2s ease-in-out infinite;
+  transform-origin: center;
+}
