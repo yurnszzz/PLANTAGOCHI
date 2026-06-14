@@ -42,7 +42,7 @@ Segmen utama kami adalah mahasiswa (usia 18–25 tahun) yang tinggal di kost ata
 
 **Ownership – Kepemilikan** 
 
-Plantagochi dimiliki dan dioperasikan secara kolektif oleh lima mahasiswa Technopreneurship Universitas Indonesia sebagai co-founder dengan porsi kepemilikan yang setara. 
+Plantagochi dimiliki dan dioperasikan secara kolektif oleh lima mahasiswa Technopreneurship Universitas Pembangunan Nasional Veteran Jakarta sebagai co-founder dengan porsi kepemilikan yang setara. 
 
 ## **Expected Returns – Target Capaian** 
 
@@ -52,7 +52,7 @@ Pada fase MVP (bulan 1–3), kami menargetkan penjualan 200–500 pot dengan pen
 
 ## **Company Summary** 
 
-Plantagochi adalah startup technopreneurship yang lahir dari Universitas Indonesia, bergerak di segmen Phygital Lifestyle Product — perpaduan antara produk fisik dan pengalaman digital. Kami menjual lebih dari sekadar tanaman; kami menjual sebuah sistem engagement berbasis gamifikasi yang mendorong tanggung jawab personal dan kecintaan terhadap lingkungan hijau. Nama  "Plantagochi"  merupakan  portmanteau  dari  "Plant"  (tanaman)  dan  "Tamagotchi" (mainan  peliharaan  digital  ikonik),  mencerminkan  DNA  inovasi  produk  kami  yang memadukan nostalgia dengan teknologi modern. 
+Plantagochi adalah startup technopreneurship yang lahir dari Universitas Pembangunan Nasional Veteran Jakarta, bergerak di segmen Phygital Lifestyle Product — perpaduan antara produk fisik dan pengalaman digital. Kami menjual lebih dari sekadar tanaman; kami menjual sebuah sistem engagement berbasis gamifikasi yang mendorong tanggung jawab personal dan kecintaan terhadap lingkungan hijau. Nama  "Plantagochi"  merupakan  portmanteau  dari  "Plant"  (tanaman)  dan  "Tamagotchi" (mainan  peliharaan  digital  ikonik),  mencerminkan  DNA  inovasi  produk  kami  yang memadukan nostalgia dengan teknologi modern. 
 
 ## **Mission Statement** 
 
