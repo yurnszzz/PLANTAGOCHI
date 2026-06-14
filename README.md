@@ -159,4 +159,4 @@ Plantagochi beroperasi sebagai **white-label SaaS platform**:
 
 ---
 
-*Technopreneurship — Universitas Indonesia, 2026*
+*Technopreneurship — Universitas Pembangunan Nasional Veteran Jakarta, 2026*
