@@ -109,7 +109,7 @@ PLANTAGOCHI/
 ### 1. Clone Repository
 
 ```bash
-git clone https://github.com/yurnszzz/PLANTAGOCHI.git
+git clone <repo-url>
 cd PLANTAGOCHI
 ```
 
@@ -158,5 +158,3 @@ Plantagochi beroperasi sebagai **white-label SaaS platform**:
 - Studi Kelayakan: `Laporan_Studi_Kelayakan_Bisnis_Plantagochi.md`
 
 ---
-
-*Technopreneurship — Universitas Pembangunan Nasional Veteran Jakarta, 2026*
