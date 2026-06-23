@@ -26,7 +26,7 @@ Plantagochi menggabungkan produk fisik berupa kaktus mini dalam pot berdesain un
 
 ## **Market Focus – Target Pasar** 
 
-Segmen utama kami adalah mahasiswa (usia 18–25 tahun) yang tinggal di kost atau apartemen, serta masyarakat urban muda yang menyukai estetika ruang. Secara geografis, kami memulai penetrasi  dari  lingkungan  kampus  Universitas  Indonesia  dan  kampus-kampus  besar  di Jabodetabek, kemudian meluas ke seluruh Indonesia melalui kanal digital. 
+Segmen utama kami adalah mahasiswa (usia 18–25 tahun) yang tinggal di kost atau apartemen, serta masyarakat urban muda yang menyukai estetika ruang. Secara geografis, kami memulai penetrasi  dari  lingkungan  kampus  Universitas  Pembangunan Nasional Veteran Jakarta (UPNVJ)  dan  kampus-kampus  besar  di Jabodetabek, kemudian meluas ke seluruh Indonesia melalui kanal digital. 
 
 ## **Competitive Advantage – Keunggulan Kompetitif** 
 
