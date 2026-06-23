@@ -20,7 +20,7 @@ Terakhir diupdate: 23 Juni 2026
 
 ## Progress Tracker
 
-### ✅ SELESAI (Dikerjakan oleh Antigravity/Hasan)
+### ✅ SELESAI (Dikerjakan oleh Hasan)
 
 | # | Task | File/Folder | Status |
 |---|------|-------------|--------|
