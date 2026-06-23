@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import { Menu, X } from 'lucide-react'
+import { Menu, X, LogIn } from 'lucide-react'
 import Logo from './Logo'
+import ThemeToggle from './ThemeToggle'
 import './Navbar.css'
 
 export default function Navbar() {
@@ -58,19 +59,29 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <Link to="/demo" className="btn btn-primary navbar__cta">
-            Coba Gratis
-          </Link>
+          <div className="navbar__actions">
+            <ThemeToggle />
+            <Link to="/login" className="btn btn-secondary navbar__login">
+              <LogIn size={16} />
+              <span>Login</span>
+            </Link>
+            <Link to="/demo" className="btn btn-primary navbar__cta">
+              Coba Gratis
+            </Link>
+          </div>
         </div>
 
-        <button
-          className="navbar__toggle"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
-          id="navbar-toggle"
-        >
-          {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
+        <div className="navbar__mobile-actions">
+          <ThemeToggle />
+          <button
+            className="navbar__toggle"
+            onClick={() => setMobileOpen(!mobileOpen)}
+            aria-label="Toggle menu"
+            id="navbar-toggle"
+          >
+            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
       </div>
     </nav>
   )

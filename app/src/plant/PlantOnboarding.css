@@ -1,0 +1,126 @@
+.onboarding {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-hero);
+  padding: var(--space-xl);
+}
+
+.onboarding__container {
+  max-width: 420px;
+  width: 100%;
+}
+
+/* Welcome Step */
+.onboarding__welcome {
+  text-align: center;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.onboarding__avatar-preview {
+  margin-bottom: var(--space-xl);
+  animation: float 4s ease-in-out infinite;
+}
+
+.onboarding__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 5vw, 2rem);
+  font-weight: 700;
+  margin-bottom: var(--space-md);
+}
+
+.onboarding__desc {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: var(--space-2xl);
+}
+
+.onboarding__start-btn {
+  width: 100%;
+}
+
+/* Form Step */
+.onboarding__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xl);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  backdrop-filter: blur(10px);
+  animation: fadeInUp 0.5s ease-out;
+}
+
+.onboarding__avatar-small {
+  animation: bounce-subtle 3s ease-in-out infinite;
+}
+
+.onboarding__form-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.onboarding__field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.onboarding__field label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.onboarding__input-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: 0.7rem 1rem;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+  color: var(--text-muted);
+}
+
+.onboarding__input-wrapper:focus-within {
+  border-color: var(--green-500);
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+}
+
+.onboarding__input-wrapper input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-family: var(--font-primary);
+}
+
+.onboarding__input-wrapper input::placeholder {
+  color: var(--text-muted);
+}
+
+.onboarding__char-count {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: right;
+}
+
+.onboarding__hint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.onboarding__submit {
+  width: 100%;
+}

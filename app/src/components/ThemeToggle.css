@@ -1,0 +1,42 @@
+.theme-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+}
+
+.theme-toggle__track {
+  width: 44px;
+  height: 24px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  position: relative;
+  transition: all var(--transition-base);
+}
+
+.theme-toggle:hover .theme-toggle__track {
+  border-color: var(--border-medium);
+}
+
+.theme-toggle__thumb {
+  width: 20px;
+  height: 20px;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  transition: transform var(--transition-bounce);
+}
+
+.theme-toggle__thumb--light {
+  transform: translateX(20px);
+  background: linear-gradient(135deg, #F59E0B, #FBBF24);
+}

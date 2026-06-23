@@ -1,6 +1,6 @@
 # Plantagochi
 
-### Platform SaaS Gamifikasi Interaktif untuk Penjual Kaktus & Sukulen Mini
+### Platform Phygital Gamifikasi Interaktif — Kaktus & Sukulen Mini
 
 > _"Rawat Fisiknya, Level-Up Digitalnya."_
 
@@ -8,24 +8,36 @@
 
 ## Deskripsi Proyek
 
-**Plantagochi** adalah platform SaaS (Software as a Service) yang menyediakan ekosistem gamifikasi digital untuk toko kaktus dan sukulen mini. Platform ini memungkinkan penjual memberikan pengalaman **digital twin** kepada setiap pelanggan mereka — di mana setiap tanaman fisik yang dibeli memiliki representasi digital yang dapat dirawat, di-level-up, dan dibagikan ke media sosial.
+**Plantagochi** adalah ekosistem phygital (physical + digital) yang menggabungkan penjualan kaktus mini fisik dengan pengalaman **digital twin** interaktif. Setiap pot kaktus yang dijual dilengkapi QR Code unik — saat di-scan, pembeli langsung masuk ke halaman web untuk merawat versi digital dari tanamannya: beri nama, siram mingguan, bangun streak, naik level, dan kumpulkan achievement.
 
 ### Konsep Utama
 
 ```
-Pelanggan beli kaktus → Scan QR Code di pot → Masuk halaman digital twin
-→ Rawat tanaman digital (streak mingguan) → Level-up → Share ke medsos
-→ Engagement meningkat → Repeat purchase
+Pembeli beli kaktus → Scan QR Code di pot → Masuk halaman digital twin
+→ Beri nama tanaman → Siram mingguan (streak) → Level-up avatar
+→ Kumpulkan achievement → Share ke medsos → Engagement meningkat
 ```
+
+### Arsitektur Aplikasi
+
+Aplikasi terdiri dari **3 area utama**:
+
+| Area | Routes | Deskripsi |
+|------|--------|-----------|
+| **Web Portal** | `/`, `/demo`, `/pricing`, `/login` | Landing page, demo interaktif, pricing, dan login terintegrasi |
+| **User App** | `/p/:token`, `/p/:token/setup` | Digital twin — diakses via QR scan atau login email |
+| **Admin Dashboard** | `/admin/*` | Kelola tanaman, generate QR, lihat users & analytics |
 
 ### Fitur Utama
 
-- **QR Code Integration** — Setiap pot dilengkapi QR Code unik yang langsung mengarahkan ke halaman digital twin
-- **Digital Twin & Level-Up** — Avatar tanaman berevolusi dari benih hingga berbunga (5 level)
-- **Streak System** — Penghitung streak mingguan terinspirasi Duolingo
-- **Achievement Badges** — Sistem pencapaian untuk meningkatkan engagement
-- **Buku Rapor Tanaman** — Rekap performa perawatan yang bisa di-share ke medsos
-- **Email Notification** — Pengingat otomatis untuk menyiram tanaman
+- **QR Code per Pot** — Generate dari admin dashboard, scan langsung ke digital twin
+- **Digital Twin & Level-Up** — Avatar kaktus SVG berevolusi 5 level (Benih → Tunas → Remaja → Dewasa → Berbunga)
+- **Streak System** — Counter mingguan dengan grace period, terinspirasi Duolingo
+- **Achievement Badges** — 5 badge yang unlock permanen
+- **Buku Rapor Tanaman** — Rekap performa perawatan
+- **Dark/Light Theme** — Toggle tema dengan deteksi preferensi sistem
+- **Admin Dashboard** — Generate QR, kelola tanaman & users, lihat stats
+- **Login Terintegrasi** — User login via email, Admin login via email+password
 
 ---
 
@@ -45,62 +57,18 @@ Pelanggan beli kaktus → Scan QR Code di pot → Masuk halaman digital twin
 
 ## Tech Stack
 
-| Teknologi | Kegunaan |
-|-----------|----------|
-| React 19 | UI Library |
-| Vite 6 | Build Tool & Dev Server |
-| React Router v7 | Client-side Routing |
-| Lucide React | SVG Icon Library |
-| CSS (Vanilla) | Styling & Design System |
-| LocalStorage | State Persistence (Demo) |
+| Teknologi | Kegunaan | Tier |
+|-----------|----------|------|
+| React 19 | UI Library | — |
+| Vite 8 | Build Tool & Dev Server | — |
+| React Router v7 | Client-side Routing | — |
+| Firebase Firestore | Database NoSQL | Spark (Free) |
+| Firebase Authentication | Login admin & user lookup | Spark (Free) |
+| Lucide React | SVG Icon Library | — |
+| npm `qrcode` | QR Code generation (client-side) | — |
+| CSS (Vanilla) | Styling & Design System + Dark/Light Theme | — |
 
----
-
-## Struktur Proyek
-
-```
-PLANTAGOCHI/
-├── app/                            # Web Application
-│   ├── public/
-│   │   └── plantagochi-icon.svg    # Custom SVG favicon
-│   ├── src/
-│   │   ├── components/             # Reusable UI components
-│   │   │   ├── CactusAvatar.jsx    # Digital twin SVG avatar (5 levels)
-│   │   │   ├── CactusAvatar.css
-│   │   │   ├── Footer.jsx
-│   │   │   ├── Footer.css
-│   │   │   ├── Logo.jsx            # Inline SVG brand logo
-│   │   │   ├── Navbar.jsx
-│   │   │   └── Navbar.css
-│   │   ├── pages/                  # Route pages
-│   │   │   ├── DemoPage.jsx        # Interactive demo (core product)
-│   │   │   ├── DemoPage.css
-│   │   │   ├── LandingPage.jsx     # Marketing landing page
-│   │   │   ├── PricingPage.jsx     # SaaS pricing tiers
-│   │   │   └── PricingPage.css
-│   │   ├── sections/               # Landing page sections
-│   │   │   ├── HeroSection.jsx
-│   │   │   ├── HeroSection.css
-│   │   │   ├── FeaturesSection.jsx
-│   │   │   ├── FeaturesSection.css
-│   │   │   ├── HowItWorksSection.jsx
-│   │   │   ├── HowItWorksSection.css
-│   │   │   ├── ProductShowcase.jsx
-│   │   │   ├── ProductShowcase.css
-│   │   │   ├── TestimonialSection.jsx
-│   │   │   ├── TestimonialSection.css
-│   │   │   ├── CTASection.jsx
-│   │   │   └── CTASection.css
-│   │   ├── App.jsx                 # Root component with routing
-│   │   ├── main.jsx                # Entry point
-│   │   └── index.css               # Global design system
-│   ├── index.html                  # HTML template with SEO meta
-│   ├── package.json
-│   └── vite.config.js
-├── BUSINESS PLAN PLANTAGOCHI.md    # Dokumen bisnis plan
-├── Laporan_Studi_Kelayakan_Bisnis_Plantagochi.md  # Studi kelayakan bisnis
-└── README.md                       # File ini
-```
+> **Semua layanan yang dipakai 100% gratis** — tidak butuh kartu kredit.
 
 ---
 
@@ -109,28 +77,88 @@ PLANTAGOCHI/
 ### 1. Clone Repository
 
 ```bash
-<<<<<<< Updated upstream
-git clone <repo-url>
-=======
-git clone <repo url>
->>>>>>> Stashed changes
+git clone https://github.com/yurnszzz/PLANTAGOCHI.git
 cd PLANTAGOCHI
 ```
 
-### 2. Install Dependencies
+### 2. Setup Firebase (Wajib)
+
+1. Buka [console.firebase.google.com](https://console.firebase.google.com)
+2. Buat project baru (nama: `plantagochi`)
+3. **Firestore Database** → Create database → Start in production mode
+4. **Authentication** → Get started → Enable Email/Password
+5. **Project Settings** → Your apps → Add Web App → Copy config
+6. Buat file `app/.env` berdasarkan `app/.env.example`:
+
+```bash
+cd app
+cp .env.example .env
+# Edit .env dengan config Firebase dari langkah 5
+```
+
+7. **Buat admin account**:
+   - Authentication → Add user → masukkan email & password admin
+   - Firestore → Start collection `admins` → Add document:
+     - Document ID: `<uid dari user yang baru dibuat>`
+     - Field: `role` (string) = `admin`
+     - Field: `email` (string) = `<email admin>`
+
+### 3. Install Dependencies
 
 ```bash
 cd app
 npm install
 ```
 
-### 3. Jalankan Development Server
+### 4. Jalankan Development Server
 
 ```bash
 npm run dev
 ```
 
-Aplikasi akan berjalan di `http://localhost:5173`.
+Aplikasi berjalan di `http://localhost:5173`
+
+### 5. Deploy Firestore Rules
+
+```bash
+# Install Firebase CLI (sekali saja)
+npm install -g firebase-tools
+
+# Login & deploy rules
+firebase login
+firebase init firestore
+firebase deploy --only firestore:rules
+```
+
+---
+
+## Struktur Proyek
+
+```
+PLANTAGOCHI/
+├── app/                                  # Frontend (React + Vite)
+│   ├── src/
+│   │   ├── components/                   # Shared UI (Navbar, Footer, CactusAvatar, ThemeToggle)
+│   │   ├── pages/                        # Portal pages (Landing, Demo, Pricing, Login)
+│   │   ├── plant/                        # User App (PlantPage, PlantOnboarding)
+│   │   ├── admin/                        # Admin Dashboard (Layout, Dashboard, Plants, Users, Settings)
+│   │   ├── sections/                     # Landing page sections (Hero, Features, HowItWorks, etc.)
+│   │   ├── context/                      # React Context (AuthContext, ThemeContext)
+│   │   ├── hooks/                        # Custom hooks
+│   │   ├── lib/                          # Utilities (firebase.js, gameLogic.js, constants.js)
+│   │   ├── App.jsx                       # Root routing
+│   │   ├── main.jsx                      # Entry point + providers
+│   │   └── index.css                     # Design system (dark + light theme)
+│   ├── .env.example                      # Template environment variables
+│   └── package.json
+│
+├── firestore.rules                       # Firestore security rules
+├── BUSINESS PLAN PLANTAGOCHI.md          # Dokumen bisnis plan
+├── Laporan_Studi_Kelayakan_Bisnis_Plantagochi.md
+├── PRD PLANTAGOCHI.md                    # Product Requirements Document
+├── IMPLEMENTATION_PLAN.md                # Rencana implementasi & pembagian tugas
+└── README.md                             # File ini
+```
 
 ---
 
@@ -138,21 +166,16 @@ Aplikasi akan berjalan di `http://localhost:5173`.
 
 | Halaman | Path | Deskripsi |
 |---------|------|-----------|
-| **Landing Page** | `/` | Marketing page dengan hero, fitur, cara kerja, produk, testimoni, dan CTA |
-| **Demo Interaktif** | `/demo` | Demo langsung digital twin — onboarding, siram, streak, level-up, achievement |
-| **Harga** | `/pricing` | Paket SaaS (Starter/Business/Enterprise) dengan FAQ |
-
----
-
-## Model Bisnis SaaS
-
-Plantagochi beroperasi sebagai **white-label SaaS platform**:
-
-| Paket | Harga | Target |
-|-------|-------|--------|
-| **Starter** | Gratis | Penjual baru, hingga 50 QR Code |
-| **Business** | Rp 149.000/bulan | Toko serius, 500 QR Code, custom branding |
-| **Enterprise** | Custom | Bisnis besar, unlimited, white-label penuh |
+| **Landing Page** | `/` | Marketing page — hero, fitur, cara kerja, produk, testimoni, CTA |
+| **Demo Interaktif** | `/demo` | Demo digital twin (localStorage, tanpa backend) |
+| **Harga** | `/pricing` | Info paket produk + FAQ |
+| **Login** | `/login` | Login terintegrasi — Tab User (email lookup) + Tab Admin |
+| **Digital Twin** | `/p/:token` | Halaman tanaman real — tersambung Firebase |
+| **Onboarding** | `/p/:token/setup` | Scan pertama — beri nama & email |
+| **Admin Dashboard** | `/admin` | Overview stats |
+| **Admin Tanaman** | `/admin/plants` | CRUD tanaman + generate QR Code |
+| **Admin Users** | `/admin/users` | Lihat pemilik tanaman |
+| **Admin Settings** | `/admin/settings` | Pengaturan tema & info app |
 
 ---
 
@@ -160,3 +183,5 @@ Plantagochi beroperasi sebagai **white-label SaaS platform**:
 
 - Business Plan: `BUSINESS PLAN PLANTAGOCHI.md`
 - Studi Kelayakan: `Laporan_Studi_Kelayakan_Bisnis_Plantagochi.md`
+- PRD: `PRD PLANTAGOCHI.md`
+- Implementation Plan: `IMPLEMENTATION_PLAN.md`
