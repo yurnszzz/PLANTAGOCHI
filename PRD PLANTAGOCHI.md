@@ -7,7 +7,7 @@
 | **Status** | Untuk Review Tim |
 | **Disusun Berdasarkan** | Business Plan, Laporan Studi Kelayakan Bisnis, Tugas UTS Technopreneurship, Repository Codebase (`PLANTAGOCHI/app`) |
 | **Repo Reference** | `https://github.com/yurnszzz/PLANTAGOCHI` (local path: `C:\Plantagochi\PLANTAGOCHI`) |
-| **Disusun oleh** | Claude (acting as Senior PM / Tech Lead reviewer) |
+| **Disusun oleh** | Joshua |
 | **Target Pembaca** | Tim Engineering (Frontend/Backend), Tim Produk, Co-founder |
 | **Riwayat Revisi** | **v1.0** — Draft awal berdasarkan PDF + codebase. **v1.1** — Keputusan stack backend difinalisasi ke **Firebase** (Firestore + Authentication + Cloud Functions + Cloud Scheduler), menggantikan rekomendasi awal PostgreSQL/Supabase di §1.4 dan §2.5. Lihat §0 poin 6 untuk alasan keputusan. |
 
