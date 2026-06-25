@@ -18,7 +18,7 @@ export default function CTASection() {
             </h2>
             <p className="cta__desc">
               Bergabung dengan Plantagochi dan berikan pengalaman interaktif yang tak terlupakan 
-              kepada setiap pelanggan Anda. Mulai dari Rp 25.000 per pot, tanpa biaya langganan.
+              kepada setiap pelanggan Anda. Mulai gratis dengan 50 QR Code pertamamu — upgrade kapan saja.
             </p>
             <div className="cta__actions">
               <Link to="/demo" className="btn btn-primary btn-lg" id="cta-demo-btn">

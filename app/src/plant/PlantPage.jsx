@@ -3,7 +3,8 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { doc, getDoc, updateDoc, collection, addDoc, serverTimestamp } from 'firebase/firestore'
 import { db } from '../lib/firebase'
 import { getLevel, getLevelInfo, getLevelProgress, getWatersToNextLevel, canWater, processWatering } from '../lib/gameLogic'
-import { ACHIEVEMENTS, CARE_TIPS, APP_CONFIG } from '../lib/constants'
+import { ACHIEVEMENTS, CARE_TIPS, APP_CONFIG, WATER_INTERVAL_DAYS } from '../lib/constants'
+import { sendWateringReminder, getDaysSinceWatering } from '../lib/emailService'
 import CactusAvatar from '../components/CactusAvatar'
 import {
   Droplets, Flame, Trophy, Star, BookOpen, Lightbulb,
@@ -45,6 +46,20 @@ export default function PlantPage() {
         }
 
         setPlant({ id: docSnap.id, ...data })
+
+        // Trigger email reminder jika tanaman sudah overdue (client-side, Spark-compatible)
+        const daysSince = getDaysSinceWatering(data.last_watered_at, WATER_INTERVAL_DAYS)
+        if (daysSince && data.owner_email && data.plant_name) {
+          // Fire-and-forget — tidak perlu await, jangan block UI
+          sendWateringReminder({
+            plantToken: docSnap.id,
+            plantName:  data.plant_name,
+            ownerEmail: data.owner_email,
+            streak:     data.streak || 0,
+            daysSince,
+            plantUrl:   window.location.href,
+          })
+        }
       } catch (err) {
         console.error('Fetch plant error:', err)
         setError('fetch_error')

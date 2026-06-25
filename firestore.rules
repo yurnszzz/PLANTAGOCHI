@@ -2,46 +2,33 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // ========== PLANTS ==========
-    // Siapapun bisa baca via token (QR scan = akses langsung)
-    // Write dibatasi ketat via rules
     match /plants/{plantToken} {
       allow read: if true;
-
-      // Onboarding: hanya boleh set name+email SEKALI (jika plant_name masih null)
+      allow create, delete: if isAdmin();
+      allow update: if isAdmin();
       allow update: if
         resource.data.plant_name == null &&
         request.resource.data.plant_name is string &&
         request.resource.data.plant_name.size() > 0 &&
         request.resource.data.plant_name.size() <= 20;
-
-      // Watering: hanya boleh update field gameplay + cooldown 7 hari
       allow update: if
+        resource.data.plant_name != null &&
         request.resource.data.diff(resource.data).affectedKeys()
-          .hasOnly(['total_waters', 'streak', 'longest_streak', 'level',
-                    'last_watered_at', 'unlocked_achievements']) &&
+          .hasOnly(['total_waters','streak','longest_streak','level',
+                    'last_watered_at','unlocked_achievements']) &&
         (resource.data.last_watered_at == null ||
-         request.time > resource.data.last_watered_at + duration.value(7, 'd'));
-
-      // Admin: full write access jika authenticated + admin role
-      allow create, delete: if isAdmin();
-      allow update: if isAdmin();
-
-      // Watering logs subcollection
+         request.time > resource.data.last_watered_at + duration.value(7,'d'));
       match /watering_logs/{logId} {
-        allow read: if true;
-        allow create: if true; // allow logging watering events
+        allow read, create: if true;
+        allow update, delete: if isAdmin();
       }
     }
 
-    // ========== ADMINS ==========
-    // Hanya admin bisa baca datanya sendiri, write via Firebase Console only
     match /admins/{adminId} {
       allow read: if request.auth != null && request.auth.uid == adminId;
-      allow write: if false; // admin accounts dibuat manual di Firebase Console
+      allow write: if false;
     }
 
-    // ========== HELPER FUNCTION ==========
     function isAdmin() {
       return request.auth != null &&
         exists(/databases/$(database)/documents/admins/$(request.auth.uid)) &&
