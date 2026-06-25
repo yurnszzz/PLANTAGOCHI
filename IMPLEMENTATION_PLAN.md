@@ -2,7 +2,7 @@
 
 > **Dokumen ini untuk koordinasi tim. Update checklist saat task selesai.**
 
-Terakhir diupdate: 23 Juni 2026
+Terakhir diupdate: **25 Juni 2026**
 
 ---
 
@@ -20,7 +20,7 @@ Terakhir diupdate: 23 Juni 2026
 
 ## Progress Tracker
 
-### ✅ SELESAI (Dikerjakan oleh Hasan)
+### ✅ SELESAI — Sprint 1 (Dikerjakan oleh Hasan)
 
 | # | Task | File/Folder | Status |
 |---|------|-------------|--------|
@@ -50,18 +50,33 @@ Terakhir diupdate: 23 Juni 2026
 
 ---
 
+### ✅ SELESAI — Sprint 1.5: Firebase Setup (Joshua) + Bug Fix (Hasan)
+
+| # | Task | PIC | Status |
+|---|------|-----|--------|
+| J1 | Setup Firebase project (Spark) | Joshua | ✅ Done |
+| J2 | Isi `.env` dengan config Firebase | Joshua | ✅ Done |
+| J3 | Deploy Firestore rules | Joshua | ✅ Done |
+| J4 | Buat admin account di Firebase | Joshua | ✅ Done |
+| B1 | Fix watering stuck (date handling) | Hasan | ✅ Done |
+| B2 | Tambah gamifikasi (10 achievements, XP, mood, profil) | Hasan | ✅ Done |
+| B3 | Fix admin sidebar mobile overflow | Hasan | ✅ Done |
+| B4 | Rewrite landing page copy (buyer-facing) | Hasan | ✅ Done |
+| B5 | Fix navbar mobile menu close bug | Hasan | ✅ Done |
+| B6 | Fix footer anchor navigation | Hasan | ✅ Done |
+| B7 | Remove Duolingo brand mention | Hasan | ✅ Done |
+| B8 | Fix light theme phone frame | Hasan | ✅ Done |
+
+---
+
 ### 🔲 BELUM DIKERJAKAN — Per Orang
 
-#### Joshua (CTO) — PRIORITAS TINGGI
+#### Joshua (CTO) — MEDIUM
 
 | # | Task | Detail | Deadline |
 |---|------|--------|----------|
-| J1 | 🔲 Setup Firebase project (Spark) | Buat project di console.firebase.google.com, enable Firestore + Auth | Minggu 1 |
-| J2 | 🔲 Isi `.env` dengan config Firebase | Copy config dari Firebase Console → `app/.env` | Minggu 1 |
-| J3 | 🔲 Deploy Firestore rules | `firebase deploy --only firestore:rules` | Minggu 1 |
-| J4 | 🔲 Buat admin account di Firebase | Auth → Add user, Firestore → admins collection | Minggu 1 |
-| J5 | 🔲 Test login flow end-to-end | Login admin → dashboard → buat plant → QR → test scan | Minggu 2 |
-| J6 | 🔲 Test watering flow end-to-end | Scan QR → onboard → siram → cek Firestore | Minggu 2 |
+| J5 | 🔲 Test login flow end-to-end | Login admin → dashboard → buat plant → QR → test scan | Minggu ini |
+| J6 | 🔲 Test watering flow end-to-end | Scan QR → onboard → siram → cek Firestore | Minggu ini |
 | J7 | 🔲 Firestore indexes (jika perlu) | Composite indexes untuk query admin | Minggu 3 |
 | J8 | 🔲 Firebase Hosting deployment | `firebase deploy --only hosting` | Minggu 4 |
 
@@ -69,25 +84,24 @@ Terakhir diupdate: 23 Juni 2026
 
 | # | Task | Detail | Deadline |
 |---|------|--------|----------|
-| R1 | 🔲 Cross-browser testing | Test di Chrome, Safari, Firefox — mobile & desktop | Minggu 2 |
-| R2 | 🔲 Mobile responsive testing | Semua plant pages harus sempurna di HP | Minggu 2 |
+| R1 | 🔲 Cross-browser testing | Test di Chrome, Safari, Firefox — mobile & desktop | Minggu ini |
+| R2 | 🔲 Mobile responsive testing | Semua plant pages harus sempurna di HP | Minggu ini |
 | R3 | 🔲 Fix UI bugs dari testing | Bug visual yang ditemukan saat testing | Minggu 3 |
-| R4 | 🔲 Share/screenshot Buku Rapor | Implement `html-to-canvas` + Web Share API di PlantReport | Minggu 3 |
+| R4 | 🔲 Share/screenshot Buku Rapor | Implement Web Share API di PlantReport | Minggu 3 |
 
 #### Hasan (CEO) — MEDIUM
 
 | # | Task | Detail | Deadline |
 |---|------|--------|----------|
-| H1 | 🔲 Test dark/light theme semua halaman | Pastikan semua halaman bagus di kedua tema | Minggu 1 |
+| H1 | ✅ Fix 8 bugs dari testing | Watering, mobile UI, copy, gamification | Done |
 | H2 | 🔲 Lighthouse audit | Target >90 performance mobile | Minggu 3 |
-| H3 | 🔲 Fix CTASection.jsx copy | Hapus "tanpa biaya langganan" → sesuaikan model | Minggu 1 |
-| H4 | 🔲 Final polish & animations | Micro-interactions, transitions, loading states | Minggu 4 |
+| H3 | 🔲 Final polish & animations | Micro-interactions, transitions, loading states | Minggu 4 |
 
 #### Latief (COO) — RINGAN
 
 | # | Task | Detail | Deadline |
 |---|------|--------|----------|
-| L1 | 🔲 Manual QA — semua user flows | Test: scan → onboard → siram → level up → rapor | Minggu 2 |
+| L1 | 🔲 Manual QA — semua user flows | Test: scan → onboard → siram → level up → rapor | Minggu ini |
 | L2 | 🔲 Manual QA — admin flows | Test: login → dashboard → buat QR → lihat users | Minggu 3 |
 | L3 | 🔲 Kumpulkan screenshot untuk presentasi | Screenshot setiap halaman & fitur | Minggu 3 |
 | L4 | 🔲 Bantu buat slides presentasi | PowerPoint / Google Slides | Minggu 4 |
@@ -96,8 +110,8 @@ Terakhir diupdate: 23 Juni 2026
 
 | # | Task | Detail | Deadline |
 |---|------|--------|----------|
-| I1 | 🔲 Observe Joshua setup Firebase | Catat langkah-langkah untuk dokumentasi | Minggu 1 |
-| I2 | 🔲 Buat spreadsheet bug tracking | Google Sheets untuk catat bugs dari QA Latief | Minggu 2 |
+| I1 | ✅ Observe Joshua setup Firebase | Catat langkah-langkah untuk dokumentasi | Done |
+| I2 | 🔲 Buat spreadsheet bug tracking | Google Sheets untuk catat bugs dari QA Latief | Minggu ini |
 | I3 | 🔲 Update dokumen bisnis | Reconcile angka di Business Plan & Studi Kelayakan | Minggu 3 |
 | I4 | 🔲 Bantu slides presentasi | Bagian keuangan & bisnis model | Minggu 4 |
 
