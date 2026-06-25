@@ -53,6 +53,48 @@
   gap: var(--space-xl);
 }
 
+/* Mood Indicator */
+.plant-page__mood {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-md);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 500;
+  align-self: center;
+  animation: fadeInUp 0.5s ease-out;
+}
+
+/* XP Bar */
+.plant-page__xp-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.plant-page__xp-info {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-md);
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.15);
+  border-radius: var(--radius-full);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--amber-400);
+}
+
+.plant-page__xp-info span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
 /* Avatar */
 .plant-page__avatar {
   display: flex;

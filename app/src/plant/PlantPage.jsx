@@ -1,15 +1,22 @@
 import { useState, useEffect, useCallback } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { doc, getDoc, updateDoc, collection, addDoc, serverTimestamp } from 'firebase/firestore'
+import { doc, getDoc, updateDoc, collection, addDoc } from 'firebase/firestore'
 import { db } from '../lib/firebase'
-import { getLevel, getLevelInfo, getLevelProgress, getWatersToNextLevel, canWater, processWatering } from '../lib/gameLogic'
+import { getLevel, getLevelInfo, getLevelProgress, getWatersToNextLevel, canWater, getCooldownRemaining, processWatering } from '../lib/gameLogic'
 import { ACHIEVEMENTS, CARE_TIPS, APP_CONFIG } from '../lib/constants'
 import CactusAvatar from '../components/CactusAvatar'
 import {
   Droplets, Flame, Trophy, Star, BookOpen, Lightbulb,
-  ChevronDown, ChevronUp, ArrowLeft, Share2, AlertCircle
+  ChevronDown, ChevronUp, ArrowLeft, Share2, AlertCircle,
+  User, Calendar, Sparkles, Heart, Smile, Frown, Meh, Zap
 } from 'lucide-react'
 import './PlantPage.css'
+
+const PLANT_MOODS = [
+  { emoji: '😊', label: 'Senang', icon: Smile, color: 'var(--green-400)' },
+  { emoji: '😐', label: 'Biasa', icon: Meh, color: 'var(--amber-400)' },
+  { emoji: '😞', label: 'Haus', icon: Frown, color: 'var(--rose-400)' },
+]
 
 export default function PlantPage() {
   const { token } = useParams()
@@ -20,6 +27,7 @@ export default function PlantPage() {
   const [isWatering, setIsWatering] = useState(false)
   const [showReport, setShowReport] = useState(false)
   const [showTips, setShowTips] = useState(false)
+  const [showProfile, setShowProfile] = useState(false)
   const [toast, setToast] = useState(null)
   const [levelUpAnim, setLevelUpAnim] = useState(false)
   const [waterDrops, setWaterDrops] = useState(false)
@@ -62,16 +70,36 @@ export default function PlantPage() {
     setTimeout(() => setToast(null), 3000)
   }, [])
 
+  // Calculate plant mood based on watering
+  const getPlantMood = () => {
+    if (!plant?.last_watered_at) return PLANT_MOODS[2] // Haus
+    const daysSince = (Date.now() - new Date(plant.last_watered_at).getTime()) / (1000 * 60 * 60 * 24)
+    if (daysSince <= 7) return PLANT_MOODS[0]  // Senang
+    if (daysSince <= 10) return PLANT_MOODS[1] // Biasa (grace period)
+    return PLANT_MOODS[2] // Haus
+  }
+
+  // Calculate XP (experience points)
+  const getXP = () => {
+    const waters = plant?.total_waters || 0
+    const streakBonus = (plant?.longest_streak || 0) * 10
+    return (waters * 25) + streakBonus + ((plant?.unlocked_achievements || []).length * 50)
+  }
+
+  // Calculate days since onboarding
+  const getDaysSinceOnboarding = () => {
+    if (!plant?.onboarded_at) return 0
+    return Math.floor((Date.now() - new Date(plant.onboarded_at).getTime()) / (1000 * 60 * 60 * 24))
+  }
+
   // Handle watering action
   const handleWater = async () => {
     if (!plant || isWatering) return
 
     // Check cooldown
     if (!canWater(plant.last_watered_at)) {
-      const lastWatered = new Date(plant.last_watered_at)
-      const nextWater = new Date(lastWatered.getTime() + 7 * 24 * 60 * 60 * 1000)
-      const daysLeft = Math.ceil((nextWater - Date.now()) / (1000 * 60 * 60 * 24))
-      showToast(`Sudah disiram! Tunggu ${daysLeft} hari lagi.`, 'info')
+      const remaining = getCooldownRemaining(plant.last_watered_at)
+      showToast(`Sudah disiram! ${remaining || 'Tunggu minggu depan.'}`, 'info')
       return
     }
 
@@ -96,7 +124,7 @@ export default function PlantPage() {
       })
 
       // Update local state
-      setPlant(prev => ({ ...prev, ...updates }))
+      setPlant(prev => ({ ...prev, ...updates, last_watered_at: new Date().toISOString() }))
 
       // Check for level up
       if (updates.level > oldLevel) {
@@ -104,7 +132,7 @@ export default function PlantPage() {
         setTimeout(() => setLevelUpAnim(false), 2000)
         showToast(`Level Up! Sekarang Level ${updates.level} — ${getLevelInfo(updates.level).name}`, 'success')
       } else {
-        showToast('Berhasil disiram!', 'success')
+        showToast('Berhasil disiram! 🌵', 'success')
       }
 
       // Check new achievements
@@ -114,7 +142,7 @@ export default function PlantPage() {
       if (newAchievements.length > 0) {
         setTimeout(() => {
           const badge = ACHIEVEMENTS.find(ab => ab.id === newAchievements[0].code)
-          if (badge) showToast(`Achievement: ${badge.name}!`, 'success')
+          if (badge) showToast(`🏆 Achievement: ${badge.name}!`, 'success')
         }, 1500)
       }
     } catch (err) {
@@ -123,6 +151,21 @@ export default function PlantPage() {
     } finally {
       setIsWatering(false)
       setTimeout(() => setWaterDrops(false), 1000)
+    }
+  }
+
+  // Handle share
+  const handleShare = async () => {
+    const url = `${window.location.origin}/p/${token}`
+    const text = `🌵 ${plant.plant_name} sudah Level ${plant.level || 1}! Streak ${plant.streak || 0} minggu di Plantagochi!`
+    
+    if (navigator.share) {
+      try {
+        await navigator.share({ title: 'Plantagochi', text, url })
+      } catch { /* cancelled */ }
+    } else {
+      await navigator.clipboard.writeText(`${text}\n${url}`)
+      showToast('Link disalin ke clipboard!', 'info')
     }
   }
 
@@ -167,6 +210,9 @@ export default function PlantPage() {
   const watersNeeded = getWatersToNextLevel(plant.total_waters || 0)
   const unlockedCodes = (plant.unlocked_achievements || []).map(a => a.code)
   const isWaterable = canWater(plant.last_watered_at)
+  const mood = getPlantMood()
+  const xp = getXP()
+  const daysSince = getDaysSinceOnboarding()
 
   return (
     <div className="plant-page">
@@ -194,17 +240,31 @@ export default function PlantPage() {
           <ArrowLeft size={20} />
         </button>
         <h1 className="plant-page__plant-name">{plant.plant_name}</h1>
-        <button className="plant-page__share" aria-label="Share">
+        <button className="plant-page__share" onClick={handleShare} aria-label="Share">
           <Share2 size={20} />
         </button>
       </header>
 
       {/* Main Content */}
       <div className="plant-page__content">
+
+        {/* Mood Indicator */}
+        <div className="plant-page__mood">
+          <mood.icon size={16} style={{ color: mood.color }} />
+          <span style={{ color: mood.color }}>{plant.plant_name} merasa {mood.label.toLowerCase()}</span>
+        </div>
+
         {/* Avatar */}
         <div className={`plant-page__avatar ${levelUpAnim ? 'plant-page__avatar--level-up' : ''}`}>
           <CactusAvatar level={level} size={180} />
           <span className="plant-page__level-badge">Lv.{level} — {levelInfo.name}</span>
+        </div>
+
+        {/* XP Bar */}
+        <div className="plant-page__xp-bar">
+          <div className="plant-page__xp-info">
+            <span><Zap size={14} /> {xp} XP</span>
+          </div>
         </div>
 
         {/* Progress */}
@@ -215,7 +275,7 @@ export default function PlantPage() {
           <p className="plant-page__progress-text">
             {level < 5
               ? `Siram ${watersNeeded} kali lagi untuk naik level`
-              : 'Level Maksimum Tercapai!'}
+              : '🌸 Level Maksimum Tercapai!'}
           </p>
         </div>
 
@@ -227,7 +287,7 @@ export default function PlantPage() {
           id="btn-water"
         >
           <Droplets size={24} />
-          <span>{isWatering ? 'Menyiram...' : isWaterable ? 'Sudah Disiram' : 'Sudah Disiram Hari Ini'}</span>
+          <span>{isWatering ? 'Menyiram...' : isWaterable ? 'Siram Sekarang' : `Sudah Disiram${getCooldownRemaining(plant.last_watered_at) ? ' • ' + getCooldownRemaining(plant.last_watered_at) : ''}`}</span>
         </button>
 
         {/* Stats Grid */}
@@ -258,7 +318,7 @@ export default function PlantPage() {
         <div className="plant-page__section">
           <h3 className="plant-page__section-title">
             <Trophy size={18} />
-            <span>Achievements</span>
+            <span>Achievements ({unlockedCodes.length}/{ACHIEVEMENTS.length})</span>
           </h3>
           <div className="plant-page__achievements">
             {ACHIEVEMENTS.map(a => {
@@ -274,11 +334,43 @@ export default function PlantPage() {
                     <span className="plant-page__badge-name">{a.name}</span>
                     <span className="plant-page__badge-desc">{a.desc}</span>
                   </div>
+                  {unlocked && <Sparkles size={14} style={{ color: 'var(--amber-400)', flexShrink: 0 }} />}
                 </div>
               )
             })}
           </div>
         </div>
+
+        {/* User Profile */}
+        <button className="plant-page__toggle" onClick={() => setShowProfile(!showProfile)}>
+          <User size={18} />
+          <span>Profil Pemilik</span>
+          {showProfile ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+        </button>
+        {showProfile && (
+          <div className="plant-page__report">
+            <div className="plant-page__report-row">
+              <span>Email</span>
+              <strong>{plant.owner_email || 'Belum diisi'}</strong>
+            </div>
+            <div className="plant-page__report-row">
+              <span>Merawat Sejak</span>
+              <strong>{plant.onboarded_at ? new Date(plant.onboarded_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) : '-'}</strong>
+            </div>
+            <div className="plant-page__report-row">
+              <span>Lama Merawat</span>
+              <strong>{daysSince} hari</strong>
+            </div>
+            <div className="plant-page__report-row">
+              <span>Total XP</span>
+              <strong>{xp} XP</strong>
+            </div>
+            <div className="plant-page__report-row">
+              <span>Mood Tanaman</span>
+              <strong style={{ color: mood.color }}>{mood.emoji} {mood.label}</strong>
+            </div>
+          </div>
+        )}
 
         {/* Buku Rapor */}
         <button className="plant-page__toggle" onClick={() => setShowReport(!showReport)}>
@@ -313,8 +405,8 @@ export default function PlantPage() {
               <strong>{unlockedCodes.length}/{ACHIEVEMENTS.length}</strong>
             </div>
             <div className="plant-page__report-row">
-              <span>Tanaman Sejak</span>
-              <strong>{plant.onboarded_at ? new Date(plant.onboarded_at).toLocaleDateString('id-ID') : '-'}</strong>
+              <span>Total XP</span>
+              <strong>{xp} XP</strong>
             </div>
           </div>
         )}

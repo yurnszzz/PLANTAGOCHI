@@ -38,6 +38,27 @@ export const ACHIEVEMENTS = [
     type: 'water',
   },
   {
+    id: 'water_5',
+    name: 'Perawat Pemula',
+    desc: 'Siram tanaman sebanyak 5 kali',
+    requirement: 5,
+    type: 'water',
+  },
+  {
+    id: 'water_10',
+    name: 'Perawat Handal',
+    desc: 'Siram tanaman sebanyak 10 kali',
+    requirement: 10,
+    type: 'water',
+  },
+  {
+    id: 'water_20',
+    name: 'Ahli Kaktus',
+    desc: 'Siram tanaman sebanyak 20 kali',
+    requirement: 20,
+    type: 'water',
+  },
+  {
     id: 'streak_3',
     name: 'Konsisten!',
     desc: 'Capai streak 3 minggu berturut-turut',
@@ -50,6 +71,20 @@ export const ACHIEVEMENTS = [
     desc: 'Capai streak 5 minggu berturut-turut',
     requirement: 5,
     type: 'streak',
+  },
+  {
+    id: 'streak_8',
+    name: 'Tak Terbendung!',
+    desc: 'Capai streak 8 minggu berturut-turut',
+    requirement: 8,
+    type: 'streak',
+  },
+  {
+    id: 'level_2',
+    name: 'Mulai Tumbuh',
+    desc: 'Naikkan tanamanmu ke Level 2',
+    requirement: 2,
+    type: 'level',
   },
   {
     id: 'level_3',

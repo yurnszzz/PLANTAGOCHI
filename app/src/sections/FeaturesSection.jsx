@@ -5,32 +5,32 @@ const features = [
   {
     icon: QrCode,
     title: 'Scan QR, Langsung Akses',
-    desc: 'Setiap pot dilengkapi QR Code unik. Pelanggan scan, langsung masuk ke halaman digital twin tanaman mereka. Zero friction, tanpa install app.',
+    desc: 'Setiap pot dilengkapi QR Code unik. Tinggal scan, kamu langsung masuk ke halaman digital twin tanamanmu. Tanpa install app, tanpa ribet.',
   },
   {
     icon: Droplets,
     title: 'Tombol "Sudah Disiram"',
-    desc: 'Mekanisme self-report mingguan yang membangun kebiasaan merawat tanaman. Satu tap, streak bertambah, tanaman tumbuh.',
+    desc: 'Setiap minggu, tekan tombol siram di halaman web. Streak-mu bertambah, tanaman digitalmu tumbuh. Sederhana tapi bikin ketagihan!',
   },
   {
     icon: TrendingUp,
     title: 'Level-Up & Digital Twin',
-    desc: 'Avatar tanaman berevolusi seiring streak. Dari benih mungil hingga kaktus berbunga — pelanggan Anda akan ketagihan naik level.',
+    desc: 'Avatar kaktusmu berevolusi dari benih hingga berbunga seiring kamu merawatnya. Ada 5 level yang bisa kamu capai — bisakah kamu sampai max?',
   },
   {
     icon: Bell,
-    title: 'Notifikasi Email Pengingat',
-    desc: 'Sistem email otomatis mengingatkan pelanggan untuk menyiram. Integrasi EmailJS gratis hingga 200 email/bulan.',
+    title: 'Pengingat Siram',
+    desc: 'Tidak perlu khawatir lupa menyiram. Kami akan mengingatkanmu lewat email saat waktunya menyiram tanamanmu.',
   },
   {
     icon: Trophy,
     title: 'Achievement & Streak',
-    desc: 'Sistem pencapaian dan streak mingguan terinspirasi Duolingo. Buat pelanggan merasa "sayang" untuk melewatkan satu minggu.',
+    desc: 'Kumpulkan badge pencapaian dan bangun streak mingguan. Sayang kalau streak putus — motivasi kamu untuk terus merawat!',
   },
   {
     icon: Share2,
-    title: 'Buku Rapor & Social Share',
-    desc: 'Rekap performa perawatan yang bisa di-screenshot dan dibagikan ke Instagram & TikTok. Marketing gratis dari pelanggan Anda.',
+    title: 'Buku Rapor & Share',
+    desc: 'Lihat rekap performa perawatan tanamanmu. Screenshot dan bagikan ke Instagram & TikTok — pamer progresmu ke teman-teman!',
   },
 ]
 
@@ -44,11 +44,11 @@ export default function FeaturesSection() {
             Fitur Unggulan
           </span>
           <h2 className="section-title">
-            Semua yang Dibutuhkan untuk <span className="text-gradient">Meningkatkan Engagement</span>
+            Semua yang Kamu Butuhkan untuk <span className="text-gradient">Merawat Kaktusmu</span>
           </h2>
           <p className="section-desc">
-            Platform Plantagochi menyediakan seluruh fitur gamifikasi yang membuat pelanggan 
-            toko kaktus Anda kembali lagi dan lagi — tanpa tambahan hardware.
+            Plantagochi memberikan pengalaman digital yang bikin kamu semangat merawat tanaman 
+            setiap minggu — dari fitur streak hingga achievement badges.
           </p>
         </div>
 

@@ -377,15 +377,29 @@
 /* Responsive */
 @media (max-width: 768px) {
   .admin-sidebar {
+    width: 280px;
+    max-width: 80vw;
     transform: translateX(-100%);
+    box-shadow: none;
   }
 
   .admin-sidebar--open {
     transform: translateX(0);
+    box-shadow: var(--shadow-xl);
   }
 
   .admin-sidebar__close {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-md);
+    transition: background var(--transition-fast);
+  }
+
+  .admin-sidebar__close:hover {
+    background: var(--bg-glass);
   }
 
   .admin-overlay {
@@ -394,18 +408,55 @@
 
   .admin-main {
     margin-left: 0;
+    width: 100%;
+  }
+
+  .admin-topbar {
+    padding: var(--space-sm) var(--space-md);
   }
 
   .admin-topbar__menu {
     display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    transition: background var(--transition-fast);
+  }
+
+  .admin-topbar__menu:hover {
+    background: var(--bg-glass);
+  }
+
+  .admin-topbar__email {
+    display: none;
   }
 
   .admin-content {
     padding: var(--space-md);
   }
 
+  .admin-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
   .admin-table th,
   .admin-table td {
     padding: var(--space-sm) var(--space-md);
+    font-size: 0.8rem;
+  }
+
+  .admin-table-header {
+    padding: var(--space-md);
+  }
+
+  .admin-modal {
+    padding: var(--space-xl);
+    margin: var(--space-md);
+  }
+
+  .admin-page__title {
+    font-size: 1.25rem;
   }
 }
