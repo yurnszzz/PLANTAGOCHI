@@ -118,14 +118,14 @@
   .navbar__links {
     position: fixed;
     inset: 0;
-    background: var(--bg-card);
-    backdrop-filter: blur(20px);
+    background: var(--bg-primary);
     flex-direction: column;
     justify-content: center;
     gap: var(--space-xl);
     opacity: 0;
     pointer-events: none;
     transition: opacity var(--transition-base);
+    z-index: 1000;
   }
 
   .navbar__links--open {
