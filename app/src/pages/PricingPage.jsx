@@ -1,105 +1,92 @@
 import { Link } from 'react-router-dom'
-import { Check, X, ArrowRight, HelpCircle, Zap, Building2, Rocket } from 'lucide-react'
+import { Check, ArrowRight, HelpCircle, Leaf, Star, Gift } from 'lucide-react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import './PricingPage.css'
 
-const plans = [
+const products = [
   {
-    name: 'Starter',
-    icon: Zap,
-    price: 'Gratis',
-    priceNote: 'Selamanya',
-    desc: 'Untuk penjual baru yang ingin mencoba platform Plantagochi.',
+    name: 'Starter Pack',
+    icon: Leaf,
+    price: 'Rp 25.000',
+    priceNote: '/ pot kaktus',
+    desc: 'Satu pot kaktus mini fisik dengan digital twin. Cocok untuk hadiah atau koleksi pertama.',
     features: [
-      { text: 'Hingga 50 QR Code / tanaman', included: true },
-      { text: 'Digital twin dasar (3 level)', included: true },
-      { text: 'Tombol "Sudah Disiram"', included: true },
-      { text: 'Streak counter', included: true },
-      { text: 'Hosting di subdomain Plantagochi', included: true },
-      { text: 'Notifikasi email (50/bulan)', included: true },
-      { text: 'Branding Plantagochi', included: true },
-      { text: 'Custom branding toko', included: false },
-      { text: 'Achievement system', included: false },
-      { text: 'Analytics dashboard', included: false },
-      { text: 'Buku Rapor Tanaman', included: false },
-      { text: 'Priority support', included: false },
+      '1 pot kaktus mini fisik',
+      '1 QR Code digital twin unik',
+      'Evolusi avatar 5 level',
+      'Streak & achievement system',
+      'Daily check-in (+koin harian)',
+      'Toko aksesori kaktus',
+      'Leaderboard komunitas',
+      'Email reminder mingguan',
     ],
-    cta: 'Mulai Gratis',
-    popular: false,
+    cta: 'Beli Sekarang',
+    highlight: false,
+    badge: null,
   },
   {
-    name: 'Business',
-    icon: Building2,
-    price: 'Rp 149.000',
-    priceNote: '/bulan',
-    desc: 'Untuk toko yang serius mengembangkan engagement pelanggan.',
+    name: 'Twin Pack',
+    icon: Star,
+    price: 'Rp 45.000',
+    priceNote: '/ 2 pot kaktus',
+    desc: 'Dua pot kaktus — satu untukmu, satu untuk teman. Hemat Rp 5.000 dari harga satuan.',
     features: [
-      { text: 'Hingga 500 QR Code / tanaman', included: true },
-      { text: 'Digital twin penuh (5 level)', included: true },
-      { text: 'Tombol "Sudah Disiram"', included: true },
-      { text: 'Streak counter', included: true },
-      { text: 'Custom domain toko', included: true },
-      { text: 'Notifikasi email (500/bulan)', included: true },
-      { text: 'Custom branding toko', included: true },
-      { text: 'Achievement system penuh', included: true },
-      { text: 'Analytics dashboard', included: true },
-      { text: 'Buku Rapor Tanaman', included: true },
-      { text: 'Social sharing features', included: true },
-      { text: 'Email support (24 jam)', included: true },
+      '2 pot kaktus mini fisik',
+      '2 QR Code digital twin unik',
+      'Semua fitur Starter Pack',
+      'Hemat Rp 5.000',
+      'Cocok untuk hadiah berpasangan',
+      'Bisa dipantau terpisah',
     ],
-    cta: 'Mulai Business',
-    popular: true,
+    cta: 'Beli Twin Pack',
+    highlight: true,
+    badge: 'Terlaris',
   },
   {
-    name: 'Enterprise',
-    icon: Rocket,
-    price: 'Custom',
-    priceNote: 'Hubungi kami',
-    desc: 'Untuk bisnis besar dengan kebutuhan khusus dan volume tinggi.',
+    name: 'Gift Box',
+    icon: Gift,
+    price: 'Rp 99.000',
+    priceNote: '/ kotak hadiah',
+    desc: 'Lima pot kaktus dalam kotak hadiah eksklusif. Sempurna untuk ulang tahun atau hampers.',
     features: [
-      { text: 'QR Code unlimited', included: true },
-      { text: 'Digital twin custom design', included: true },
-      { text: 'Semua fitur Business', included: true },
-      { text: 'White-label penuh', included: true },
-      { text: 'API access', included: true },
-      { text: 'Integrasi e-commerce', included: true },
-      { text: 'Custom gamification rules', included: true },
-      { text: 'Leaderboard komunitas', included: true },
-      { text: 'Dedicated account manager', included: true },
-      { text: 'SLA 99.9% uptime', included: true },
-      { text: 'Onboarding khusus', included: true },
-      { text: 'Priority support 24/7', included: true },
+      '5 pot kaktus mini fisik',
+      '5 QR Code digital twin unik',
+      'Semua fitur Starter Pack',
+      'Kotak hadiah eksklusif',
+      'Kartu ucapan custom',
+      'Hemat Rp 26.000',
     ],
-    cta: 'Hubungi Sales',
-    popular: false,
+    cta: 'Beli Gift Box',
+    highlight: false,
+    badge: 'Paling Hemat',
   },
 ]
 
 const faqs = [
   {
-    q: 'Apakah pelanggan saya perlu download aplikasi?',
-    a: 'Tidak! Plantagochi adalah web app. Pelanggan hanya perlu scan QR Code dan langsung bisa akses melalui browser smartphone mereka. Zero friction, zero install.',
+    q: 'Bagaimana cara mengaktifkan digital twin?',
+    a: 'Scan QR Code yang tertempel di pot menggunakan kamera HP. Kamu akan langsung diarahkan ke halaman digital twin tanamanmu dan bisa langsung beri nama serta mulai merawatnya.',
   },
   {
-    q: 'Bagaimana cara mendapatkan QR Code untuk setiap pot?',
-    a: 'Setelah berlangganan, Anda mendapat akses ke dashboard untuk generate QR Code unik per tanaman. QR Code bisa dicetak sendiri sebagai stiker waterproof.',
+    q: 'Apakah ada biaya bulanan setelah beli?',
+    a: 'Tidak ada! Kamu cukup bayar harga pot kaktus fisik sekali saja. Digital twin dan semua fitur gamifikasinya gratis selamanya.',
   },
   {
-    q: 'Apakah ada biaya tambahan untuk pelanggan saya?',
-    a: 'Tidak ada. Akses web app bersifat lifetime per unit yang dibeli. Pelanggan Anda mendapat pengalaman digital twin tanpa biaya tambahan.',
+    q: 'Berapa lama kaktus fisiknya bertahan?',
+    a: 'Kaktus mini kami dipilih khusus yang tahan lama dan mudah dirawat. Dengan penyiraman 1x seminggu, kaktus bisa bertahan bertahun-tahun.',
   },
   {
-    q: 'Bagaimana dengan data pelanggan saya?',
-    a: 'Data pelanggan Anda sepenuhnya milik Anda. Kami tidak akan menjual atau membagikan data pelanggan ke pihak ketiga. Tersedia fitur export data.',
+    q: 'Bisa beli untuk dikirim ke luar kota?',
+    a: 'Saat ini kami masih dalam tahap pengembangan untuk pengiriman. Hubungi kami via WhatsApp untuk informasi ketersediaan pengiriman ke kotamu.',
   },
   {
-    q: 'Apakah saya bisa kustomisasi tampilan sesuai brand toko?',
-    a: 'Ya! Pada paket Business ke atas, Anda bisa mengubah logo, warna, nama brand, dan bahkan menggunakan custom domain untuk toko Anda.',
+    q: 'Apa itu streak dan kenapa penting?',
+    a: 'Streak adalah hitungan berapa minggu berturut-turut kamu menyiram kaktus digital. Semakin panjang streak, semakin tinggi peringkat di leaderboard komunitas!',
   },
   {
-    q: 'Berapa lama setup awalnya?',
-    a: 'Kurang dari 15 menit. Daftar, atur profil toko, generate QR Code pertama Anda, dan langsung bisa digunakan. Kami juga menyediakan panduan lengkap.',
+    q: 'Apakah koin bisa dipakai beli kaktus sungguhan?',
+    a: 'Koin virtual hanya bisa dipakai di toko aksesori digital kaktusmu. Tapi siapa tahu — ke depannya koin bisa ditukar reward menarik!',
   },
 ]
 
@@ -107,80 +94,90 @@ export default function PricingPage() {
   return (
     <>
       <Navbar />
-      <main className="pricing">
+      <main className="pricing-page">
         <div className="container">
+
           {/* Header */}
-          <div className="pricing__header">
-            <span className="section-tag">
-              <Zap size={14} />
-              Harga
-            </span>
-            <h1 className="section-title">
-              Paket yang <span className="text-gradient">Pas untuk Bisnis Anda</span>
-            </h1>
-            <p className="section-desc" style={{ textAlign: 'center' }}>
-              Mulai gratis, scale sesuai kebutuhan. Semua paket sudah termasuk 
-              infrastruktur hosting dan maintenance.
+          <div className="pricing-page__header">
+            <div className="section-tag">
+              <Leaf size={14} />
+              Koleksi Plantagochi
+            </div>
+            <h1>Pilih Kaktusmu</h1>
+            <p>
+              Setiap pot dilengkapi QR Code digital twin. Beli fisiknya, rawat digitalnya —
+              gratis selamanya tanpa biaya bulanan.
             </p>
           </div>
 
-          {/* Plans Grid */}
-          <div className="pricing__grid">
-            {plans.map((plan) => (
-              <div key={plan.name} className={`pricing__card ${plan.popular ? 'pricing__card--popular' : ''}`}>
-                {plan.popular && (
-                  <div className="pricing__popular-badge">Paling Populer</div>
+          {/* Product Cards */}
+          <div className="pricing-page__grid">
+            {products.map((product) => (
+              <div
+                key={product.name}
+                className={`pricing-card ${product.highlight ? 'pricing-card--highlight' : ''}`}
+              >
+                {product.badge && (
+                  <div className="pricing-card__badge">{product.badge}</div>
                 )}
-                <div className="pricing__card-header">
-                  <div className="pricing__plan-icon">
-                    <plan.icon size={20} />
-                  </div>
-                  <h3 className="pricing__plan-name">{plan.name}</h3>
-                  <div className="pricing__price">
-                    <span className="pricing__price-amount">{plan.price}</span>
-                    <span className="pricing__price-note">{plan.priceNote}</span>
-                  </div>
-                  <p className="pricing__plan-desc">{plan.desc}</p>
+
+                <div className="pricing-card__icon">
+                  <product.icon size={24} />
                 </div>
 
-                <ul className="pricing__features">
-                  {plan.features.map((f) => (
-                    <li key={f.text} className={`pricing__feature ${f.included ? '' : 'pricing__feature--disabled'}`}>
-                      {f.included
-                        ? <Check size={16} className="pricing__feature-icon pricing__feature-icon--check" />
-                        : <X size={16} className="pricing__feature-icon pricing__feature-icon--x" />
-                      }
-                      {f.text}
+                <h2 className="pricing-card__name">{product.name}</h2>
+                <p className="pricing-card__desc">{product.desc}</p>
+
+                <div className="pricing-card__price">
+                  <span className="pricing-card__amount">{product.price}</span>
+                  <span className="pricing-card__note">{product.priceNote}</span>
+                </div>
+
+                <ul className="pricing-card__features">
+                  {product.features.map((f) => (
+                    <li key={f}>
+                      <Check size={15} />
+                      <span>{f}</span>
                     </li>
                   ))}
                 </ul>
 
                 <Link
-                  to={plan.popular ? '/demo' : '#'}
-                  className={`btn ${plan.popular ? 'btn-primary' : 'btn-secondary'} pricing__cta`}
+                  to="/#cta"
+                  className={`btn ${product.highlight ? 'btn-primary' : 'btn-secondary'} pricing-card__cta`}
                 >
-                  {plan.cta}
+                  {product.cta}
                   <ArrowRight size={16} />
                 </Link>
               </div>
             ))}
           </div>
 
+          {/* Guarantee Banner */}
+          <div className="pricing-page__guarantee">
+            <span>🌵</span>
+            <div>
+              <strong>Digital Twin Gratis Selamanya</strong>
+              <p>Tidak ada biaya berlangganan. Bayar sekali, nikmati seterusnya.</p>
+            </div>
+          </div>
+
           {/* FAQ */}
-          <div className="pricing__faq">
-            <h2 className="pricing__faq-title">
-              <HelpCircle size={22} />
-              Pertanyaan yang Sering Ditanyakan
+          <div className="pricing-page__faq">
+            <h2 className="pricing-page__faq-title">
+              <HelpCircle size={24} />
+              Pertanyaan Umum
             </h2>
-            <div className="pricing__faq-grid">
+            <div className="pricing-page__faq-grid">
               {faqs.map((faq) => (
-                <div key={faq.q} className="pricing__faq-item">
-                  <h4 className="pricing__faq-question">{faq.q}</h4>
-                  <p className="pricing__faq-answer">{faq.a}</p>
+                <div key={faq.q} className="pricing-faq-item">
+                  <h3>{faq.q}</h3>
+                  <p>{faq.a}</p>
                 </div>
               ))}
             </div>
           </div>
+
         </div>
       </main>
       <Footer />

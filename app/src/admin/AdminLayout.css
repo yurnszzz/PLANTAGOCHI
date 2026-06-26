@@ -377,10 +377,9 @@
 /* Responsive */
 @media (max-width: 768px) {
   .admin-sidebar {
-    width: 280px;
-    max-width: 80vw;
     transform: translateX(-100%);
-    box-shadow: none;
+    width: 280px;
+    z-index: 200;
   }
 
   .admin-sidebar--open {
@@ -390,55 +389,61 @@
 
   .admin-sidebar__close {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: var(--radius-md);
-    transition: background var(--transition-fast);
-  }
-
-  .admin-sidebar__close:hover {
-    background: var(--bg-glass);
   }
 
   .admin-overlay {
     display: block;
+    z-index: 199;
   }
 
   .admin-main {
     margin-left: 0;
     width: 100%;
+    overflow-x: hidden;
   }
 
   .admin-topbar {
-    padding: var(--space-sm) var(--space-md);
+    padding: var(--space-md);
   }
 
   .admin-topbar__menu {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: var(--radius-md);
-    transition: background var(--transition-fast);
-  }
-
-  .admin-topbar__menu:hover {
-    background: var(--bg-glass);
   }
 
   .admin-topbar__email {
-    display: none;
+    max-width: 160px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.75rem;
   }
 
   .admin-content {
     padding: var(--space-md);
+    overflow-x: hidden;
   }
 
   .admin-stats {
     grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-sm);
+  }
+
+  .admin-stat-card {
+    padding: var(--space-md);
+  }
+
+  .admin-stat-card__value {
+    font-size: 1.4rem;
+  }
+
+  /* Table scroll on mobile */
+  .admin-table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .admin-table {
+    min-width: 600px;
   }
 
   .admin-table th,
@@ -447,16 +452,17 @@
     font-size: 0.8rem;
   }
 
-  .admin-table-header {
-    padding: var(--space-md);
-  }
-
   .admin-modal {
-    padding: var(--space-xl);
-    margin: var(--space-md);
+    padding: var(--space-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .admin-stats {
+    grid-template-columns: 1fr 1fr;
   }
 
-  .admin-page__title {
-    font-size: 1.25rem;
+  .admin-topbar__email {
+    max-width: 120px;
   }
 }

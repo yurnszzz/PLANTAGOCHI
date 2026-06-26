@@ -41,12 +41,13 @@ export default function PlantOnboarding() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     if (!plantName.trim()) return
+    if (!email.trim()) return
 
     setSubmitting(true)
     try {
       await updateDoc(doc(db, 'plants', token), {
         plant_name: plantName.trim(),
-        owner_email: email.trim().toLowerCase() || null,
+        owner_email: email.trim().toLowerCase(),
         onboarded_at: new Date().toISOString(),
         is_active: true,
         level: 1,
@@ -138,19 +139,20 @@ export default function PlantOnboarding() {
             </div>
 
             <div className="onboarding__field">
-              <label htmlFor="owner-email">Email (opsional)</label>
+              <label htmlFor="owner-email">Email *</label>
               <div className="onboarding__input-wrapper">
                 <Mail size={18} />
                 <input
                   id="owner-email"
                   type="email"
-                  placeholder="Untuk pengingat siram & login"
+                  placeholder="email@kamu.com"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  required
                 />
               </div>
               <span className="onboarding__hint">
-                Isi email agar bisa login dari portal dan terima pengingat siram
+                Untuk menerima pengingat siram dan login ke portal
               </span>
             </div>
 
@@ -164,7 +166,7 @@ export default function PlantOnboarding() {
             <button
               type="submit"
               className="btn btn-primary btn-lg onboarding__submit"
-              disabled={submitting || !plantName.trim()}
+              disabled={submitting || !plantName.trim() || !email.trim()}
               id="btn-submit-onboarding"
             >
               {submitting ? 'Mendaftarkan...' : 'Mulai Merawat'}

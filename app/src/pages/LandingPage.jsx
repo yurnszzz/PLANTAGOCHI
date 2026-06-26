@@ -4,7 +4,6 @@ import HeroSection from '../sections/HeroSection'
 import FeaturesSection from '../sections/FeaturesSection'
 import HowItWorksSection from '../sections/HowItWorksSection'
 import ProductShowcase from '../sections/ProductShowcase'
-import TestimonialSection from '../sections/TestimonialSection'
 import CTASection from '../sections/CTASection'
 
 export default function LandingPage() {
@@ -16,7 +15,6 @@ export default function LandingPage() {
         <FeaturesSection />
         <HowItWorksSection />
         <ProductShowcase />
-        <TestimonialSection />
         <CTASection />
       </main>
       <Footer />
