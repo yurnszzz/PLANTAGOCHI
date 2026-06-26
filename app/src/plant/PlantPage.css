@@ -45,23 +45,43 @@
 
 /* Content */
 .plant-page__content {
-  max-width: 480px;
+  max-width: 960px;
   margin: 0 auto;
-  padding: var(--space-xl);
-  display: flex;
-  flex-direction: column;
+  padding: var(--space-xl) var(--space-2xl);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas:
+    "avatar    stats"
+    "avatar    progress"
+    "avatar    water"
+    "achieve   achieve"
+    "report    report"
+    "tips      tips";
   gap: var(--space-xl);
+  align-items: start;
 }
 
-/* Avatar */
+/* Avatar column spans 3 rows on desktop */
 .plant-page__avatar {
+  grid-area: avatar;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--space-md);
-  padding: var(--space-2xl) 0;
+  padding: var(--space-2xl) var(--space-xl);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-xl);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 80px;
   transition: all var(--transition-bounce);
 }
+
+.plant-page__progress { grid-area: progress; }
+.plant-page__water-btn-wrap { grid-area: water; }
+.plant-page__stats { grid-area: stats; }
+.plant-page__section { grid-area: achieve; }
 
 .plant-page__avatar--level-up {
   animation: level-up-glow 1.5s ease-out;
@@ -425,16 +445,229 @@
   color: var(--rose-400);
 }
 
-@media (max-width: 480px) {
+@media (max-width: 768px) {
   .plant-page__content {
+    max-width: 480px;
     padding: var(--space-md);
-  }
-
-  .plant-page__stats {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "avatar"
+      "stats"
+      "progress"
+      "water"
+      "achieve"
+      "report"
+      "tips";
   }
 
   .plant-page__avatar {
+    position: static;
+    background: none;
+    border: none;
     padding: var(--space-xl) 0;
   }
+
+  .plant-page__stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .plant-page__stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Accessory overlay on avatar */
+.plant-page__avatar-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+.plant-page__accessory-overlay {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  font-size: 2rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+  pointer-events: none;
+}
+
+.plant-page__coins {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--amber-400);
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+  padding: 2px 12px;
+  border-radius: var(--radius-full);
+}
+
+/* Daily Check-in */
+.plant-page__checkin {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.plant-page__checkin-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.plant-page__checkin-header svg {
+  color: var(--green-400);
+}
+
+.plant-page__checkin-bonus {
+  margin-left: auto;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--amber-400);
+}
+
+.plant-page__checkin-desc {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+
+.plant-page__checkin-btn {
+  width: 100%;
+  padding: 0.75rem;
+  border-radius: var(--radius-lg);
+  background: var(--gradient-primary);
+  color: white;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.plant-page__checkin-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow);
+}
+
+.plant-page__checkin-btn--done {
+  background: var(--bg-glass);
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+  cursor: not-allowed;
+}
+
+/* Shop */
+.plant-page__shop-coins {
+  margin-left: auto;
+  font-size: 0.8rem;
+  color: var(--amber-400);
+  font-weight: 600;
+}
+
+.plant-page__shop {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.plant-page__shop-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+}
+
+.plant-page__shop-item--equipped {
+  border-color: var(--green-700);
+  background: rgba(16, 185, 129, 0.06);
+}
+
+.plant-page__shop-emoji {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+
+.plant-page__shop-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.plant-page__shop-name {
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.plant-page__shop-tag {
+  font-size: 0.7rem;
+  color: var(--green-400);
+  font-weight: 600;
+}
+
+.plant-page__shop-tag--owned {
+  color: var(--text-muted);
+}
+
+.plant-page__shop-btn {
+  padding: 0.4rem 1rem;
+  border-radius: var(--radius-md);
+  background: var(--gradient-primary);
+  color: white;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all var(--transition-base);
+}
+
+.plant-page__shop-btn--owned {
+  background: var(--bg-glass);
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+}
+
+/* Community links */
+.plant-page__community-links {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.plant-page__community-link {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: 0.75rem;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: all var(--transition-base);
+  text-decoration: none;
+}
+
+.plant-page__community-link:hover {
+  border-color: var(--green-700);
+  color: var(--green-400);
+}
+
+.plant-page__community-link svg {
+  color: var(--green-400);
 }

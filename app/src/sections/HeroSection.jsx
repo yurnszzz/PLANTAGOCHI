@@ -17,7 +17,7 @@ export default function HeroSection() {
         <div className="hero__content animate-fade-in-up">
           <div className="section-tag">
             <Sparkles size={14} />
-            Platform SaaS untuk Penjual Kaktus
+            Kaktus Mini dengan Jiwa Digital
           </div>
 
           <h1 className="hero__title">
@@ -27,9 +27,9 @@ export default function HeroSection() {
           </h1>
 
           <p className="hero__subtitle">
-            Plantagochi adalah platform SaaS gamifikasi interaktif untuk toko kaktus & sukulen mini. 
-            Berikan pelanggan Anda pengalaman <strong>digital twin</strong> yang membuat mereka 
-            kembali lagi dan lagi.
+            Setiap kaktus Plantagochi hadir dengan <strong>digital twin</strong>-nya sendiri.
+            Pindai QR Code di pot, rawat kaktus digitalmu, kumpulkan streak, dan naik level
+            bersama tanaman fisikmu.
           </p>
 
           <div className="hero__stats">
@@ -39,8 +39,8 @@ export default function HeroSection() {
             </div>
             <div className="hero__stat-divider" />
             <div className="hero__stat">
-              <span className="hero__stat-value">60-70%</span>
-              <span className="hero__stat-label">Gross Margin</span>
+              <span className="hero__stat-value">5 Level</span>
+              <span className="hero__stat-label">Evolusi Digital</span>
             </div>
             <div className="hero__stat-divider" />
             <div className="hero__stat">

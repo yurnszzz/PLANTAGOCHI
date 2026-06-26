@@ -26,6 +26,8 @@ export default function Navbar() {
     { label: 'Cara Kerja', to: '/#how-it-works' },
     { label: 'Harga', to: '/pricing' },
     { label: 'Demo', to: '/demo' },
+    { label: 'Peringkat', to: '/leaderboard' },
+    { label: 'Taman', to: '/garden' },
   ]
 
   const handleNavClick = (e, to) => {

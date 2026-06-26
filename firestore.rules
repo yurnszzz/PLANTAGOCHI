@@ -6,18 +6,23 @@ service cloud.firestore {
       allow read: if true;
       allow create, delete: if isAdmin();
       allow update: if isAdmin();
+
+      // ONBOARDING: sekali saja saat plant_name masih null
       allow update: if
         resource.data.plant_name == null &&
         request.resource.data.plant_name is string &&
         request.resource.data.plant_name.size() > 0 &&
         request.resource.data.plant_name.size() <= 20;
+
+      // GAMEPLAY: watering + check-in + likes + accessories + coins
       allow update: if
         resource.data.plant_name != null &&
         request.resource.data.diff(resource.data).affectedKeys()
-          .hasOnly(['total_waters','streak','longest_streak','level',
-                    'last_watered_at','unlocked_achievements']) &&
-        (resource.data.last_watered_at == null ||
-         request.time > resource.data.last_watered_at + duration.value(7,'d'));
+          .hasOnly(['total_waters', 'streak', 'longest_streak', 'level',
+                    'last_watered_at', 'unlocked_achievements',
+                    'community_likes', 'coins', 'accessories',
+                    'equipped_accessory', 'last_checkin', 'is_active']);
+
       match /watering_logs/{logId} {
         allow read, create: if true;
         allow update, delete: if isAdmin();

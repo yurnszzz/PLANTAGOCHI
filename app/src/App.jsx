@@ -3,6 +3,8 @@ import LandingPage from './pages/LandingPage'
 import DemoPage from './pages/DemoPage'
 import PricingPage from './pages/PricingPage'
 import LoginPage from './pages/LoginPage'
+import LeaderboardPage from './pages/LeaderboardPage'
+import GardenPage from './pages/GardenPage'
 import PlantPage from './plant/PlantPage'
 import PlantOnboarding from './plant/PlantOnboarding'
 import AdminLayout from './admin/AdminLayout'
@@ -20,6 +22,8 @@ function App() {
       <Route path="/demo" element={<DemoPage />} />
       <Route path="/pricing" element={<PricingPage />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/leaderboard" element={<LeaderboardPage />} />
+      <Route path="/garden" element={<GardenPage />} />
 
       {/* ===== User App (Digital Twin) ===== */}
       <Route path="/p/:token" element={<PlantPage />} />

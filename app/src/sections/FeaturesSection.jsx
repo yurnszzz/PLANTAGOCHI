@@ -25,7 +25,7 @@ const features = [
   {
     icon: Trophy,
     title: 'Achievement & Streak',
-    desc: 'Sistem pencapaian dan streak mingguan terinspirasi Duolingo. Buat pelanggan merasa "sayang" untuk melewatkan satu minggu.',
+    desc: 'Sistem pencapaian dan streak mingguan yang membuat pemilik kaktus merasa "sayang" untuk melewatkan satu minggu perawatan.',
   },
   {
     icon: Share2,
