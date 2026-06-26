@@ -117,7 +117,7 @@ export default function LoginPage() {
                 <>
                   <div className="login-page__card-info">
                     <Leaf size={20} className="login-page__card-icon" />
-                    <p>Masukkan email yang kamu daftarkan saat onboarding tanaman untuk mengakses digital twin-mu.</p>
+                    <p>Masukkan email yang kamu daftarkan saat pertama kali scan QR Code pot kaktusmu.</p>
                   </div>
 
                   <form onSubmit={handleUserLookup} className="login-page__form">
@@ -172,6 +172,19 @@ export default function LoginPage() {
                       </div>
                     </div>
                   )}
+
+                  {/* Belum punya akun — arahkan ke QR scan */}
+                  <div className="login-page__register-hint">
+                    <div className="login-page__register-hint__icon">🌵</div>
+                    <div>
+                      <strong>Belum punya akun?</strong>
+                      <p>
+                        Akun dibuat otomatis saat kamu <strong>scan QR Code</strong> di pot kaktus Plantagochi untuk pertama kali.
+                        Belum punya kaktusnya?{' '}
+                        <a href="/pricing">Lihat koleksi kami →</a>
+                      </p>
+                    </div>
+                  </div>
 
                   <div className="login-page__alt">
                     <p>Punya QR Code dari pot kamu?</p>

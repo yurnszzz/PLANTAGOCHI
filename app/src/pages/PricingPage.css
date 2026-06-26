@@ -230,3 +230,40 @@
     grid-template-columns: 1fr;
   }
 }
+
+.pricing__subtitle {
+  color: var(--text-secondary);
+  max-width: 560px;
+  text-align: center;
+  margin-top: var(--space-md);
+}
+
+/* Guarantee Banner */
+.pricing__guarantee {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-xl);
+  background: rgba(16, 185, 129, 0.06);
+  border: 1px solid rgba(16, 185, 129, 0.15);
+  border-radius: var(--radius-xl);
+  margin-bottom: var(--space-4xl);
+}
+
+.pricing__guarantee span:first-child {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.pricing__guarantee strong {
+  display: block;
+  font-size: 1rem;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.pricing__guarantee p {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0;
+}

@@ -290,7 +290,23 @@ export default function PlantPage() {
           <ArrowLeft size={20} />
         </button>
         <h1 className="plant-page__plant-name">{plant.plant_name}</h1>
-        <button className="plant-page__share" aria-label="Share">
+        <button
+          className="plant-page__share"
+          aria-label="Share"
+          onClick={async () => {
+            const shareData = {
+              title: `${plant.plant_name} — Plantagochi`,
+              text: `Lihat kaktus digitalku "${plant.plant_name}" di Plantagochi! Lv.${level} dengan streak ${plant.streak || 0} minggu 🌵`,
+              url: window.location.href,
+            }
+            if (navigator.share) {
+              try { await navigator.share(shareData) } catch {}
+            } else {
+              await navigator.clipboard.writeText(window.location.href)
+              showToast('Link disalin ke clipboard! 📋', 'success')
+            }
+          }}
+        >
           <Share2 size={20} />
         </button>
       </header>
@@ -307,7 +323,6 @@ export default function PlantPage() {
               </span>
             )}
           </div>
-          <span className="plant-page__level-badge">Lv.{level} — {levelInfo.name}</span>
           <span className="plant-page__coins">🪙 {plant.coins || 0} koin</span>
         </div>
 

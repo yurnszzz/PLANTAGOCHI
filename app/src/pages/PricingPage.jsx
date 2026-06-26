@@ -22,7 +22,7 @@ const products = [
       'Email reminder mingguan',
     ],
     cta: 'Beli Sekarang',
-    highlight: false,
+    popular: false,
     badge: null,
   },
   {
@@ -40,7 +40,7 @@ const products = [
       'Bisa dipantau terpisah',
     ],
     cta: 'Beli Twin Pack',
-    highlight: true,
+    popular: true,
     badge: 'Terlaris',
   },
   {
@@ -58,7 +58,7 @@ const products = [
       'Hemat Rp 26.000',
     ],
     cta: 'Beli Gift Box',
-    highlight: false,
+    popular: false,
     badge: 'Paling Hemat',
   },
 ]
@@ -94,49 +94,49 @@ export default function PricingPage() {
   return (
     <>
       <Navbar />
-      <main className="pricing-page">
+      <main className="pricing">
         <div className="container">
 
           {/* Header */}
-          <div className="pricing-page__header">
+          <div className="pricing__header">
             <div className="section-tag">
               <Leaf size={14} />
               Koleksi Plantagochi
             </div>
             <h1>Pilih Kaktusmu</h1>
-            <p>
+            <p className="pricing__subtitle">
               Setiap pot dilengkapi QR Code digital twin. Beli fisiknya, rawat digitalnya —
               gratis selamanya tanpa biaya bulanan.
             </p>
           </div>
 
           {/* Product Cards */}
-          <div className="pricing-page__grid">
+          <div className="pricing__grid">
             {products.map((product) => (
               <div
                 key={product.name}
-                className={`pricing-card ${product.highlight ? 'pricing-card--highlight' : ''}`}
+                className={`pricing__card ${product.popular ? 'pricing__card--popular' : ''}`}
               >
                 {product.badge && (
-                  <div className="pricing-card__badge">{product.badge}</div>
+                  <div className="pricing__popular-badge">{product.badge}</div>
                 )}
 
-                <div className="pricing-card__icon">
-                  <product.icon size={24} />
+                <div className="pricing__card-header">
+                  <div className="pricing__plan-icon">
+                    <product.icon size={22} />
+                  </div>
+                  <h2 className="pricing__plan-name">{product.name}</h2>
+                  <div className="pricing__price">
+                    <span className="pricing__price-amount">{product.price}</span>
+                    <span className="pricing__price-note">{product.priceNote}</span>
+                  </div>
+                  <p className="pricing__plan-desc">{product.desc}</p>
                 </div>
 
-                <h2 className="pricing-card__name">{product.name}</h2>
-                <p className="pricing-card__desc">{product.desc}</p>
-
-                <div className="pricing-card__price">
-                  <span className="pricing-card__amount">{product.price}</span>
-                  <span className="pricing-card__note">{product.priceNote}</span>
-                </div>
-
-                <ul className="pricing-card__features">
+                <ul className="pricing__features">
                   {product.features.map((f) => (
-                    <li key={f}>
-                      <Check size={15} />
+                    <li key={f} className="pricing__feature">
+                      <Check size={15} className="pricing__feature-icon--check" />
                       <span>{f}</span>
                     </li>
                   ))}
@@ -144,7 +144,7 @@ export default function PricingPage() {
 
                 <Link
                   to="/#cta"
-                  className={`btn ${product.highlight ? 'btn-primary' : 'btn-secondary'} pricing-card__cta`}
+                  className={`btn ${product.popular ? 'btn-primary' : 'btn-secondary'} pricing__cta`}
                 >
                   {product.cta}
                   <ArrowRight size={16} />
@@ -154,7 +154,7 @@ export default function PricingPage() {
           </div>
 
           {/* Guarantee Banner */}
-          <div className="pricing-page__guarantee">
+          <div className="pricing__guarantee">
             <span>🌵</span>
             <div>
               <strong>Digital Twin Gratis Selamanya</strong>
@@ -163,16 +163,16 @@ export default function PricingPage() {
           </div>
 
           {/* FAQ */}
-          <div className="pricing-page__faq">
-            <h2 className="pricing-page__faq-title">
+          <div className="pricing__faq">
+            <h2 className="pricing__faq-title">
               <HelpCircle size={24} />
               Pertanyaan Umum
             </h2>
-            <div className="pricing-page__faq-grid">
+            <div className="pricing__faq-grid">
               {faqs.map((faq) => (
-                <div key={faq.q} className="pricing-faq-item">
-                  <h3>{faq.q}</h3>
-                  <p>{faq.a}</p>
+                <div key={faq.q} className="pricing__faq-item">
+                  <h3 className="pricing__faq-question">{faq.q}</h3>
+                  <p className="pricing__faq-answer">{faq.a}</p>
                 </div>
               ))}
             </div>
