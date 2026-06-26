@@ -51,17 +51,62 @@ export function getWatersToNextLevel(totalWaters) {
 
 /**
  * Check if plant can be watered (cooldown check)
- * @param {string|null} lastWateredAt - ISO string of last watering time
+ * Handles ISO strings, Firestore Timestamps, and edge cases
+ * @param {string|object|null} lastWateredAt - ISO string or Firestore Timestamp
  * @param {boolean} isDemoMode - If true, use 3-second cooldown
  * @returns {boolean}
  */
 export function canWater(lastWateredAt, isDemoMode = false) {
   if (!lastWateredAt) return true
-  const diff = Date.now() - new Date(lastWateredAt).getTime()
+
+  // Handle Firestore Timestamp objects (has .toDate or .seconds)
+  let lastDate
+  if (typeof lastWateredAt === 'object' && lastWateredAt.toDate) {
+    lastDate = lastWateredAt.toDate()
+  } else if (typeof lastWateredAt === 'object' && lastWateredAt.seconds) {
+    lastDate = new Date(lastWateredAt.seconds * 1000)
+  } else {
+    lastDate = new Date(lastWateredAt)
+  }
+
+  // Guard against invalid dates
+  if (isNaN(lastDate.getTime())) return true
+
+  const diff = Date.now() - lastDate.getTime()
+  // If diff is negative (future date from manual edits), allow watering
+  if (diff < 0) return true
+
   const cooldownMs = isDemoMode
     ? 3000 // 3 seconds for demo
     : WATER_INTERVAL_DAYS * 24 * 60 * 60 * 1000 // 7 days for production
   return diff > cooldownMs
+}
+
+/**
+ * Get remaining cooldown time as human-readable string
+ */
+export function getCooldownRemaining(lastWateredAt) {
+  if (!lastWateredAt) return null
+
+  let lastDate
+  if (typeof lastWateredAt === 'object' && lastWateredAt.toDate) {
+    lastDate = lastWateredAt.toDate()
+  } else if (typeof lastWateredAt === 'object' && lastWateredAt.seconds) {
+    lastDate = new Date(lastWateredAt.seconds * 1000)
+  } else {
+    lastDate = new Date(lastWateredAt)
+  }
+
+  if (isNaN(lastDate.getTime())) return null
+
+  const nextWater = new Date(lastDate.getTime() + WATER_INTERVAL_DAYS * 24 * 60 * 60 * 1000)
+  const remaining = nextWater - Date.now()
+  if (remaining <= 0) return null
+
+  const days = Math.floor(remaining / (1000 * 60 * 60 * 24))
+  const hours = Math.floor((remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+  if (days > 0) return `${days} hari ${hours} jam lagi`
+  return `${hours} jam lagi`
 }
 
 /**
@@ -117,9 +162,9 @@ export function checkNewAchievements(totalWaters, streak, longestStreak, level, 
     if (unlockedCodes.includes(achievement.id)) continue // already unlocked
 
     let qualifies = false
-    if (achievement.id === 'first_water') qualifies = totalWaters >= achievement.requirement
-    else if (achievement.id.startsWith('streak_')) qualifies = longestStreak >= achievement.requirement
-    else if (achievement.id.startsWith('level_')) qualifies = level >= achievement.requirement
+    if (achievement.type === 'water') qualifies = totalWaters >= achievement.requirement
+    else if (achievement.type === 'streak') qualifies = longestStreak >= achievement.requirement
+    else if (achievement.type === 'level') qualifies = level >= achievement.requirement
 
     if (qualifies) {
       newlyUnlocked.push({

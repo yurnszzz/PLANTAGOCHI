@@ -49,11 +49,11 @@ export default function ProductShowcase() {
             Produk
           </span>
           <h2 className="section-title">
-            Paket Produk <span className="text-gradient">Siap Jual</span>
+            Pilih <span className="text-gradient">Kaktusmu</span>
           </h2>
           <p className="section-desc">
-            Tiga tier produk yang sudah dirancang untuk memaksimalkan margin dan menjangkau 
-            berbagai segmen pelanggan.
+            Tiga pilihan paket kaktus mini lengkap dengan QR Code digital twin. 
+            Setiap pot langsung terhubung ke pengalaman digital.
           </p>
         </div>
 
@@ -91,8 +91,8 @@ export default function ProductShowcase() {
               </ul>
 
               <div className="products__card-margin">
-                <span>Gross Margin</span>
-                <span className="products__card-margin-value">~65-70%</span>
+                <span>Digital Twin</span>
+                <span className="products__card-margin-value">Termasuk</span>
               </div>
             </div>
           ))}

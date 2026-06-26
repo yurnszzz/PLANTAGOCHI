@@ -6,25 +6,25 @@ const steps = [
     icon: Package,
     num: '01',
     title: 'Beli Kaktus + QR Code',
-    desc: 'Pelanggan membeli kaktus mini dari toko Anda. Setiap pot sudah dilengkapi stiker QR Code unik yang terhubung ke platform.',
+    desc: 'Pilih kaktus mini favoritmu. Setiap pot sudah dilengkapi stiker QR Code unik yang terhubung ke platform digital.',
   },
   {
     icon: QrCode,
     num: '02',
     title: 'Scan & Daftarkan',
-    desc: 'Pelanggan memindai QR Code, masuk ke halaman onboarding, dan memberi nama pada tanaman digital mereka.',
+    desc: 'Pindai QR Code, masuk ke halaman onboarding, dan beri nama pada tanaman digitalmu. Cuma butuh 10 detik!',
   },
   {
     icon: Smartphone,
     num: '03',
     title: 'Rawat & Level-Up',
-    desc: 'Setiap minggu, tekan tombol "Sudah Disiram". Streak bertambah, tanaman digital naik level dan berevolusi.',
+    desc: 'Setiap minggu, tekan tombol "Sudah Disiram". Streak bertambah, tanaman digitalmu naik level dan berevolusi.',
   },
   {
     icon: Heart,
     num: '04',
-    title: 'Engagement & Repeat Buy',
-    desc: 'Pelanggan terkoneksi secara emosional. Mereka share di medsos, beli lagi, dan merekomendasikan ke teman.',
+    title: 'Share & Koleksi',
+    desc: 'Lihat Buku Rapor tanamanmu, kumpulkan achievement, dan share progresmu ke media sosial!',
   },
 ]
 

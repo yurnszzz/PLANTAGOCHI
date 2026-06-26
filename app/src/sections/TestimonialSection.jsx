@@ -4,15 +4,15 @@ import './TestimonialSection.css'
 const testimonials = [
   {
     name: 'Rina Safitri',
-    role: 'Mahasiswi UI',
+    role: 'Mahasiswi',
     text: 'Aku beli kaktus buat hiasan meja belajar, ternyata ada fitur digital twin-nya! Jadi rajin nyiram karena sayang streaknya mau putus.',
     stars: 5,
     avatar: 'RS',
   },
   {
     name: 'Ahmad Fadli',
-    role: 'Pemilik Toko Tanaman',
-    text: 'Sebagai penjual, platform ini game-changer. Pelanggan saya jadi sering balik beli pot baru karena ketagihan naik level. Revenue naik 40%!',
+    role: 'Kolektor Tanaman',
+    text: 'Udah punya 3 kaktus dari Plantagochi. Seru banget nge-level up tanamannya, achievement-nya bikin ketagihan. Mau beli lagi!',
     stars: 5,
     avatar: 'AF',
   },
@@ -42,11 +42,11 @@ export default function TestimonialSection() {
             Testimoni
           </span>
           <h2 className="section-title">
-            Dicintai oleh <span className="text-gradient">Pengguna & Penjual</span>
+            Dicintai oleh <span className="text-gradient">Para Pemilik Kaktus</span>
           </h2>
           <p className="section-desc">
-            Lihat bagaimana Plantagochi membantu penjual meningkatkan engagement dan pelanggan 
-            merawat tanaman mereka dengan lebih menyenangkan.
+            Lihat bagaimana Plantagochi membantu mereka merawat tanaman 
+            dengan lebih menyenangkan dan konsisten.
           </p>
         </div>
 
